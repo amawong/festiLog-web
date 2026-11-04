@@ -11,9 +11,9 @@ function Events() {
     const [error, setError] = useState('')
 
     useEffect(() => {
-        api.get('/api/events')
-            .then(res => setEvents(res.data.event))
-            .catch(err => console.error(err))
+      api.get('/api/events')
+        .then(res => setEvents(res.data.event))
+        .catch(err => console.error(err))
     }, [])  // [] means "run once component loads"
     
     const handleSubmit = async (e) => {
@@ -32,6 +32,18 @@ function Events() {
             setError('Invalid event')
         }
     }
+
+    const handleDelete = async (id) => {
+      try {
+        await api.delete(`/api/events/${id}`)
+        setEvents(prev => prev.filter(e => e.id !== id))
+        setError('')
+      
+      } catch (e) {
+          setError('Could not delete event')
+      }
+    }
+
     return (
         <div>
             {events.map(event => (
@@ -41,6 +53,7 @@ function Events() {
                 <p>{event.venue}</p>
                 <p>{new Date(event.date).toLocaleDateString(undefined, { timeZone: 'UTC' })}</p>
                 <p>{event.genre}</p>
+                <button onClick={() => handleDelete(event.id)}>Delete</button>
               </div>
             ))}
             <form onSubmit={handleSubmit}>
