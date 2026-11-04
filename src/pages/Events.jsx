@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import api from '../api/client'
+import Navbar from '../components/Navbar'
 
 function Events() {
     const [events, setEvents] = useState([]) // [] instead of null => can use .map w/o a loading check
@@ -46,6 +47,7 @@ function Events() {
 
     return (
         <div>
+          <Navbar />
             {events.map(event => (
               <div key={event.id}>
                 <h3>{event.name}</h3>
