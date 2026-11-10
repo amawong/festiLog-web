@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import api from '../api/client'
 import Navbar from '../components/Navbar'
+import { Link } from 'react-router-dom'
 
 function Events() {
     const [events, setEvents] = useState([]) // [] instead of null => can use .map w/o a loading check
@@ -50,7 +51,7 @@ function Events() {
           <Navbar />
             {events.map(event => (
               <div key={event.id}>
-                <h3>{event.name}</h3>
+                <h3><Link to={`/events/${event.id}`}>{event.name}</Link></h3>
                 <p>{event.city}</p>
                 <p>{event.venue}</p>
                 <p>{new Date(event.date).toLocaleDateString(undefined, { timeZone: 'UTC' })}</p>
