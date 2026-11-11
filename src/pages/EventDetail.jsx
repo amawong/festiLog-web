@@ -35,6 +35,16 @@ function EventDetail() {
         }
     }
 
+    const handleDeleteSet = async (setId) => {
+        try {
+            await api.delete(`/api/sets/${setId}`)
+            setEvent(prev => ({...prev, sets: prev.sets.filter(s => s.id !== setId) }))
+            setError('')
+        } catch (e) {
+            setError('Could not delete')
+        }                                   
+    }
+
     if (!event) return <div>Loading...</div> 
 
     return (
@@ -51,6 +61,7 @@ function EventDetail() {
                     <p>{set.artist.name}</p>
                     <p>Rating: {set.rating ?? 'N/A'}</p>
                     <p>Notes: {set.notes}</p>
+                    <button onClick={() => handleDeleteSet(set.id)}>Delete</button>
                 </div>
                 
             ))}
