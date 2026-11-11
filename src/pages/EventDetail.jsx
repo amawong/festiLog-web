@@ -55,17 +55,17 @@ function EventDetail() {
             <p>{new Date(event.date).toLocaleDateString(undefined, { timeZone: 'UTC' })}</p>
 
             <h3>Sets</h3>
-            {event.sets.length === 0 && <p>No sets logged yet.</p>}
-            {event.sets.map(set => (
-                <div key={set.id}>
-                    <p>{set.artist.name}</p>
-                    <p>Rating: {set.rating ?? 'N/A'}</p>
-                    <p>Notes: {set.notes}</p>
-                    <button onClick={() => handleDeleteSet(set.id)}>Delete</button>
-                </div>
-                
-            ))}
-
+            <div className="card-grid">
+                {event.sets.length === 0 && <p>No sets logged yet.</p>}
+                {event.sets.map(set => (
+                    <div className="card" key={set.id}>
+                        <p>{set.artist.name}</p>
+                        <p>Rating: {set.rating ?? 'N/A'}</p>
+                        <p>Notes: {set.notes}</p>
+                        <button onClick={() => handleDeleteSet(set.id)}>Delete</button>
+                    </div>
+                ))}
+            </div>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"

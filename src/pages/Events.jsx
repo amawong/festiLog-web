@@ -49,16 +49,18 @@ function Events() {
     return (
         <div>
           <Navbar />
-            {events.map(event => (
-              <div key={event.id}>
-                <h3><Link to={`/events/${event.id}`}>{event.name}</Link></h3>
-                <p>{event.city}</p>
-                <p>{event.venue}</p>
-                <p>{new Date(event.date).toLocaleDateString(undefined, { timeZone: 'UTC' })}</p>
-                <p>{event.genre}</p>
-                <button onClick={() => handleDelete(event.id)}>Delete</button>
-              </div>
-            ))}
+            <div className="card-grid">
+              {events.map(event => (
+                <div className="card" key={event.id}>
+                  <h3><Link to={`/events/${event.id}`}>{event.name}</Link></h3>
+                  <p>{event.city}</p>
+                  <p>{event.venue}</p>
+                  <p>{new Date(event.date).toLocaleDateString(undefined, { timeZone: 'UTC' })}</p>
+                  <p>{event.genre}</p>
+                  <button onClick={() => handleDelete(event.id)}>Delete</button>
+                </div>
+              ))}
+            </div>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"

@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard'
 import Events from './pages/Events'
 import EventDetail from './pages/EventDetail'
 import Artists from './pages/Artists'
-
+import './index.css'
 
 function App() {
   const token = localStorage.getItem('token')

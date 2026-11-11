@@ -7,14 +7,13 @@ function Register() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault()         // prevents page from refreshing on form submit
         try {
             const res = await api.post('/api/auth/register', { email, username, password })
             localStorage.setItem('token', res.data.token)
-            navigate('/dashboard')
+            window.location.href = '/dashboard'
 
         } catch (e) {
             setError('Invalid email or password')
