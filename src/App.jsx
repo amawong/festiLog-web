@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard'
 import Events from './pages/Events'
 import EventDetail from './pages/EventDetail'
 import Artists from './pages/Artists'
+import Landing from './pages/Landing'
 import './index.css'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/" element={token ? <Navigate to="/dashboard" /> : <Landing />} /> 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/login" />} />

@@ -12,6 +12,8 @@ function EventDetail() {
     const [rating, setRating] = useState('')
     const [notes, setNotes] = useState('')
     const [error, setError] = useState('')
+    const [editingId, setEditingId] = useState(null)
+    const [editForm, setEditForm] = useState({ rating: '', notes: ''})
 
     useEffect(() => {
         api.get(`/api/events/${id}`)
@@ -45,6 +47,29 @@ function EventDetail() {
         }                                   
     }
 
+    const handleSaveSet = async (setId) => {
+        try {
+            setError('')
+            const res = await api.put(`/api/sets/${setId}`, {
+                rating: Number(editForm.rating), 
+                notes: editForm.notes, 
+            })
+            
+            setEvent(prev => ({
+                ...prev,
+                sets: prev.sets.map(s =>
+                    s.id === setId
+                    ? { ...s, ...res.data.updatedSet }
+                    : s
+                ),
+            }))
+            setEditingId(null)
+        } catch (e) {
+            console.error(e)
+            setError('Couldnt save changes')
+        }
+    }
+
     if (!event) return <div>Loading...</div> 
 
     return (
@@ -59,10 +84,33 @@ function EventDetail() {
                 {event.sets.length === 0 && <p>No sets logged yet.</p>}
                 {event.sets.map(set => (
                     <div className="card" key={set.id}>
-                        <p>{set.artist.name}</p>
-                        <p>Rating: {set.rating ?? 'N/A'}</p>
-                        <p>Notes: {set.notes}</p>
-                        <button onClick={() => handleDeleteSet(set.id)}>Delete</button>
+                        {editingId === set.id ? (
+                        <form onSubmit={(e) => { e.preventDefault(); handleSaveSet(set.id) }}>
+                            <h3>{set.artist.name}</h3>
+                            <input 
+                                type="number" 
+                                min="1" 
+                                max="10" 
+                                value={editForm.rating}
+                                onChange={(e) => setEditForm({ ...editForm, rating: e.target.value })} 
+                            />
+                            <input 
+                                value={editForm.notes}
+                                onChange={(e) => setEditForm({ ...editForm, notes: e.target.value })} 
+                            />
+                            <button type="submit">Save</button>
+                            <button type="button" onClick={() => setEditingId(null)}>Cancel</button>
+                        </form>
+                        ) : (
+                        <>
+                            <h3>{set.artist.name}</h3>
+                            <p>Rating: {set.rating ?? 'N/A'}</p>
+                            <p>Notes: {set.notes}</p>
+                            <button onClick={() => { setEditingId(set.id); setEditForm({ rating: set.rating, notes: set.notes || ''}) }}>Edit</button>
+                            <button onClick={() => handleDeleteSet(set.id)}>Delete</button>
+                        </> 
+                        )}
+                        
                     </div>
                 ))}
             </div>

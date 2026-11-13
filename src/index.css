@@ -67,6 +67,12 @@ h2, h3 {
 
 }
 
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* CARD */
 .card {
   background: var(--card);
@@ -161,4 +167,22 @@ button {
 
 button:hover {
   box-shadow: 0 0 12px var(--pink)
+}
+
+/* Register and Login */
+
+.account-login {
+  color: white;
+}
+
+.account-login a {
+  color: var(--cyan);
+}
+
+.account-register {
+  color: white;
+}
+
+.account-register a {
+  color: var(--cyan);
 }

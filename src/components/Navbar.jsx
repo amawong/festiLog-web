@@ -8,7 +8,9 @@ function Navbar() {
 
     return (
         <nav className="navbar">
-            <Link to="/dashboard">FestiLog</Link>
+            <Link to="/dashboard" className="logo">
+                <img src="/logo.svg" alt="festilogo" width="36" height="36" />
+            </Link>
             <div className="nav-links">
                 <Link to="/dashboard">Dashboard</Link>
                 <Link to="/artists">Artists</Link>
