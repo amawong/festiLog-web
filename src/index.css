@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk&family=Space+Mono:wght@400;500;700&display=swap');
 
 :root {
   --bg: #0a0a12;
@@ -8,6 +8,7 @@
   --purple: #b388ff;
   --pink: #ff4fd8;
   --cyan: #3df2ff;
+  --font-small: 'Space Mono', monospace;
 }
 
 * {
@@ -33,13 +34,12 @@ h2, h3 {
   align-items: center;
   gap: 32px;
   padding: 10px;
-  border-bottom: 2px solid var(--purple);
+  font-size: 1rem;
 
 }
 
 .navbar a {
   text-decoration: none;
-  color: var(--pink);
   text-transform: uppercase;
 }
 
@@ -49,8 +49,8 @@ h2, h3 {
 
 .navbar button {
   background: transparent;
-  color: var(--cyan);
-  border: 2px solid var(--cyan);
+  color: white;
+  border: none;
   padding: 6px 14px;
   text-transform: uppercase;
   cursor: pointer;
@@ -71,6 +71,41 @@ h2, h3 {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.navbar .dashboard-link {
+  color: var(--pink);
+}
+.navbar .dashboard-link:hover {
+  text-shadow: 0 0 8px var(--pink);
+}
+
+.navbar .artist-link {
+  color: var(--cyan);
+}
+
+.navbar .artist-link:hover {
+  text-shadow: 0 0 8px var(--cyan);
+}
+
+.navbar .event-link {
+  color: var(--purple);
+}
+
+.navbar .event-link:hover {
+  text-shadow: 0 0 8px var(--purple);
+}
+
+.navbar .logout {
+  font-size: 1rem;
+  background: transparent;
+  padding-left: 0px;
+  padding-right: 10px;
+}
+
+.navbar .logout:hover {
+  text-shadow: 0 0 8px white;
+  box-shadow: none;
 }
 
 /* CARD */
@@ -186,3 +221,172 @@ button:hover {
 .account-register a {
   color: var(--cyan);
 }
+
+.register-btn, .login-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--cyan);
+    text-decoration: underline;
+    cursor: pointer;
+    font: inherit;
+  }
+
+
+/* MODAL */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;            /* above the sticky header (100) */
+}
+.modal {
+  position: relative;
+  background: var(--card);
+  padding: 32px;
+  border-radius: 16px;
+  width: min(90vw, 400px);
+}
+.modal-close { position: absolute; top: 12px; right: 16px; }
+
+/* LANDING PAGE */
+
+.features-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* LANDING HEADER */
+
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+}
+
+.landing-header nav {
+  display: flex;
+  gap: 32px;
+  text-transform: uppercase;
+}
+
+.landing-header a {
+  text-decoration: none;
+}
+
+/* .header-about {
+  color: var(--pink);
+}
+
+.header-about:hover {
+  text-shadow: 0 0 8px var(--pink);
+} */
+
+.header-login {
+  font-size: 1.1rem;
+  color: var(--cyan);
+  border: none;
+}
+
+.header-login:hover {
+  text-shadow: 0 0 8px var(--cyan);
+  box-shadow: none;
+}
+
+.header-register {
+  font-size: 1.1rem;
+  color: var(--purple);
+  border: none;
+}
+
+.header-register:hover {
+  text-shadow: 0 0 8px var(--purple);
+  box-shadow: none;
+}
+
+/* FOOTER */
+.footer-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-primary {
+  color: var(--bg);
+  background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+  padding: 14px 20px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: none;
+  font-size: 1rem;
+  box-shadow: 0 0 20px var(--purple);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  transition: transform 0.15s;
+  box-shadow: 0 0 20px var(--purple);
+}
+
+/* LANDING HERO */
+.hero {
+  
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero h1 { 
+  font-size: clamp(3rem, 10vw, 6rem); 
+  background: linear-gradient(to right, var(--cyan), var(--cyan), var(--purple), var(--pink), var(--pink)); 
+  -webkit-background-clip: text; 
+  color: transparent; 
+}
+
+.tagline {
+  font-family: var(--font-small);
+  font-size: 24px;
+}
+
+.pitch {
+  font-family: var(--font-small);
+  font-size: 20px;
+}
+
+/* LANDING ANIMATION */
+.wave-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+

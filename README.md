@@ -159,7 +159,7 @@ Optionally set `VITE_API_URL` to point at a different API. It defaults to `http:
 ## Roadmap
 
 - [ ] Edit events and sets from the UI
-- [ ] Link between the login and register pages
+- [ ] Add username usage
 - [ ] Set start times in the add-set form
 - [ ] Spotify integration for artist images and genres
 - [ ] Event timeline chart on the dashboard
