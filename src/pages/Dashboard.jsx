@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import api from '../api/client'
-import Navbar from '../components/Navbar'
 
 function Dashboard() {
     const [stats, setStats] = useState(null)
@@ -15,8 +14,7 @@ function Dashboard() {
     
     return (
         <div>
-            <Navbar />
-            <div className="">
+            <div className="dashboard">
                 <h2>Welcome to your FestiLog Dashboard!</h2>
                 <div className="card-grid">
                     <div className="card stat">

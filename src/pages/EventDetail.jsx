@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import api from "../api/client"
 import Navbar from "../components/Navbar"
 
@@ -73,13 +74,13 @@ function EventDetail() {
     if (!event) return <div>Loading...</div> 
 
     return (
-        <div>
-            <Navbar />
+        <div className="event-detail">
+            <Link to="/events" className="back">← Back</Link>
             <h2>{event.name}</h2>
             <p>{event.venue}, {event.city}</p>
             <p>{new Date(event.date).toLocaleDateString(undefined, { timeZone: 'UTC' })}</p>
 
-            <h3>Sets</h3>
+            <h2>Sets</h2>
             <div className="card-grid">
                 {event.sets.length === 0 && <p>No sets logged yet.</p>}
                 {event.sets.map(set => (
@@ -106,8 +107,8 @@ function EventDetail() {
                             <h3>{set.artist.name}</h3>
                             <p>Rating: {set.rating ?? 'N/A'}</p>
                             <p>Notes: {set.notes}</p>
-                            <button onClick={() => { setEditingId(set.id); setEditForm({ rating: set.rating, notes: set.notes || ''}) }}>Edit</button>
-                            <button onClick={() => handleDeleteSet(set.id)}>Delete</button>
+                            <button type="button" className="edit-btn" onClick={() => { setEditingId(set.id); setEditForm({ rating: set.rating, notes: set.notes || ''}) }}>Edit</button>
+                            <button type="button" onClick={() => handleDeleteSet(set.id)}>Delete</button>
                         </> 
                         )}
                         

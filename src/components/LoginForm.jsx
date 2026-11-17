@@ -1,6 +1,5 @@
 import api from "../api/client";
 import { useState } from 'react';
-import { Link } from "react-router-dom";
 
 function LoginForm({ onSwitch }) {
     const [email, setEmail] = useState('')
@@ -21,14 +20,17 @@ function LoginForm({ onSwitch }) {
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                <h2>Welcome back!</h2>
                 <input
                     type="email"
+                    required autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
                 />
                 <input 
                     type="password"
+                    required autoComplete="current-password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
@@ -38,9 +40,7 @@ function LoginForm({ onSwitch }) {
             </form>
             <p className="account-register">
                 Don't have an account?{' '}
-                {onSwitch
-                    ? <button type="button" className="register-btn" onClick={onSwitch}>Register</button>
-                    : <Link to="/register">Register</Link>} 
+                <button type="button" className="register-btn" onClick={onSwitch}>Register</button> 
             </p>
         </div>
     )

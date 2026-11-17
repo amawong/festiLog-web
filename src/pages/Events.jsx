@@ -47,8 +47,8 @@ function Events() {
     }
 
     return (
-        <div>
-          <Navbar />
+        <div className="events">
+          <h1>My Events</h1>
             <div className="card-grid">
               {events.map(event => (
                 <div className="card" key={event.id}>

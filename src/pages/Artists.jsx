@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import Navbar from "../components/Navbar"
 import api from "../api/client"
 
 
@@ -14,8 +13,8 @@ function Artists() {
     }, [])  // [] means "run once component loads"
 
   return (
-    <div>
-      <Navbar />
+    <div className="artists">
+      <h1>My Artists</h1>
       <div className="card-grid">
         {artists.length === 0 && <p>No artists yet. Log a set to get started!</p>}
           {artists.map(artist => (

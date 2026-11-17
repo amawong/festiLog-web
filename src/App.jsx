@@ -1,11 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Login from './pages/Login'
-import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import Events from './pages/Events'
 import EventDetail from './pages/EventDetail'
 import Artists from './pages/Artists'
 import Landing from './pages/Landing'
+import AppLayout from './components/AppLayout'
 import './index.css'
 
 function App() {
@@ -13,14 +12,18 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={token ? <Navigate to="/dashboard" /> : <Landing />} /> 
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/login" />} />
-      <Route path="/events" element={token ? <Events /> : <Navigate to="/login" />} />
-      <Route path="/events/:id" element={token ? <EventDetail /> : <Navigate to="/login" />} />
-      <Route path="/artists" element={token ? <Artists /> : <Navigate to="/login" />} />
-      <Route path="/" element={<Navigate to={token ? "/dashboard" : "/login"} />} />
+      {/* Public Pages */}
+      <Route path="/" element={token ? <Navigate to="/dashboard" /> : <Landing />} />
+      
+      {/* Logged In */}
+      <Route element={token ? <AppLayout /> : <Navigate to="/" />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<EventDetail />} />
+        <Route path="/artists" element={<Artists />} />
+      </Route>
+      
+      <Route path="*" element={<Navigate to="/" />} />  
     </Routes>
   )
 }

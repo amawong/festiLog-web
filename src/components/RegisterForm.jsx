@@ -1,7 +1,5 @@
 import api from "../api/client";
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 function RegisterForm({ onSwitch }) {
   const [email, setEmail] = useState('')
@@ -17,27 +15,33 @@ function RegisterForm({ onSwitch }) {
           window.location.href = '/dashboard'
 
       } catch (e) {
-          setError('Invalid email or password')
+          setError(e.response?.data?.error || 'Could not create account')
       }
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h2>Welcome to FestiLog!</h2>
         <input
           type="email"
+          required autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
         />
         <input
           type="text"
+          required 
+            minLength={8}
+            autoComplete="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
         />
         <input 
           type="password"
+          required autoComplete="new-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
@@ -46,11 +50,9 @@ function RegisterForm({ onSwitch }) {
         {error && <p style={{color: 'red'}}>{error}</p>}
       </form>
       <p className="account-login">
-                Already have an account?{' '}
-                {onSwitch
-                    ? <button type="button" className="login-btn" onClick={onSwitch}>Login</button>
-                    : <Link to="/login">Login</Link>} 
-            </p>
+        Already have an account?{' '}
+        <button type="button" className="login-btn" onClick={onSwitch}>Login</button>
+      </p>
       </div>
   )
 }
